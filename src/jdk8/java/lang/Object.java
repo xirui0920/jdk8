@@ -200,6 +200,28 @@ public class Object {
      * {@code Cloneable}, so calling the {@code clone} method on an object
      * whose class is {@code Object} will result in throwing an
      * exception at run time.
+     * 创建并返回此对象的副本。“复制”的确切含义可能取决于对象的类。一般的意图是，
+     * 对于任何对象x，表达式为: x.clone () ! = x 将是真实的，
+     * 那表达式: = = x.getClass .getClass x.clone () () () 将是正确的，
+     * 但这些不是绝对的要求。而通常情况是: x.clone () .equals (x) 的确，这不是一个绝对的要求。
+     * 按照约定，应该通过调用super.clone来获得返回的对象。
+     *
+     * 如果一个类和它的所有超类(对象除外)都遵守这个约定，
+     * 那么情况就是x.clone(). getclass () == x.getClass()。
+     * 按照约定，这个方法返回的对象应该独立于这个对象(它正在被克隆)。
+     * 要实现这种独立性，可能需要修改super返回的对象的一个或多个字段。
+     * 在返回之前进行克隆。通常，这意味着复制包含被克隆对象的内部“深层结构”的任何可变对象，
+     * 并用对副本的引用替换对这些对象的引用。如果一个类只包含原始字段或对不可变对象的引用，
+     * 那么通常情况下，super返回的对象中没有字段。克隆需要被修改。
+     * 类对象的克隆方法执行特定的克隆操作。首先，如果该对象的类没有实现接口Cloneable，
+     * 则抛出CloneNotSupportedException。注意，所有数组都被认为实现了Cloneable接口，
+     * 数组类型T[]的克隆方法的返回类型是T[]，其中T是任何引用或基元类型。
+     * 否则，该方法将创建该对象的类的一个新实例，并使用该对象对应字段的内容来初始化其所有字段，
+     * 就像通过赋值一样;字段的内容本身并没有被克隆。
+     *
+     * 因此，此方法执行该对象的“浅拷贝”，而不是“深拷贝”操作。
+     * 类对象本身并不实现接口Cloneable，
+     * 因此在其类为Object的对象上调用clone方法将导致在运行时抛出异常。
      *
      * @return     a clone of this instance.
      * @throws  CloneNotSupportedException  if the object's class does not
